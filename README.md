@@ -2,7 +2,7 @@
 
 ## Contest: Perlbatross 2025 Fukuoka
 
-This repository chronicles my journey and progressive solutions to the Perlbatross 2025 Fukuoka Code Golf Contest. Our goal was to implement a simple **Byte Pair Encoding (BPE)**-like compression algorithm in the fewest bytes possible using Ruby.
+This repository chronicles my journey and progressive solutions to the Perlbatross 2025 Fukuoka Code Golf Contest. My goal was to implement a simple **Byte Pair Encoding (BPE)**-like compression algorithm in the fewest bytes possible using Ruby.
 
 
 **Final Result:** 109 Bytes (Tied for 9th place on the final leaderboard).
@@ -29,7 +29,7 @@ My main challenge was to implement the core BPE loop—**Find Max Frequency, Rep
 
 ## 📉 Solution History: 115 Bytes $\to$ 109 Bytes
 
-We explored three main structures to handle the loop and variable management.
+I explored three main structures to handle the loop and variable management.
 
 ### 1\. BPEagle01.rb: The `while` Loop (115 Bytes)
 
@@ -48,7 +48,7 @@ puts a*?,,s
 
 ### 2\. BPEagle02.rb: The `filter_map` Leap (110 Bytes)
 
-To eliminate the expensive `while` loop setup and variable management, we pivoted to an **`Enumerable#filter_map`** structure, leveraging the `?A..?Z` range for iteration.
+To eliminate the expensive `while` loop setup and variable management, I pivoted to an **`Enumerable#filter_map`** structure, leveraging the `?A..?Z` range for iteration.
 
 ```ruby
 s=gets
@@ -63,7 +63,7 @@ puts (?A..?Z).filter_map{(k,),v=s.scan(/(?=(\w\w))/).tally.max_by{_2}
 
 -----
 
-### 3\. BPEagle03.rb: The Final 109-Byte Solution (The `map` Trick)
+### 3\. BPEagle03.rb: The Final 109-Byte Solution (The `-[p]` Trick)
 
 This was my final optimization, achieved by swapping the newly introduced `filter_map` (Ruby 2.7+) for the older, but equally short, **`map` + `-[p]`** idiom.
 
@@ -78,7 +78,23 @@ puts ((?A..?Z).map{(k,),v=s.scan(/(?=(\w\w))/).tally.max_by{_2}
 
 -----
 
-## 🚧 The Unsolved Gap: Why We Lost the Top Spot
+## 🙏 Special Acknowledgment: The AI Contribution (Gemini 3 Thinking)
+
+During the process of minimizing the core BPE logic, a key breakthrough was realizing the most efficient way to deconstruct the result of the `scan...tally.max_by` pipeline.
+
+The pipeline, `s.scan(/(?=(\w\w))/).tally.max_by{_2}`, returns a structure like `[["pair"], frequency]`.
+
+The agent (Gemini AI) highlighted that the minimal way to extract the pair string (`k`) and the frequency (`v`) simultaneously, without requiring an expensive subsequent array access (`k[0]`), was through **nested array destructuring**:
+
+```ruby
+(k,),v = s.scan(...).tally.max_by{_2}
+```
+
+This realization significantly optimized the loop body's byte count and confirmed that the **4-byte** syntax for destructuring the result was the ultimate minimal approach for this specific algorithmic step. I am astonished and grateful for this level of deep language-specific optimization insight provided by the model.
+
+-----
+
+## 🚧 The Unsolved Gap: Why I Lost the Top Spot
 
 My final 109-byte solution was robust but was 7 bytes longer than the winner's 102-byte solution. The key gap was the failure to anticipate **new-era Ruby code golf idioms** and the reuse of global variables.
 
