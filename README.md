@@ -1,8 +1,8 @@
 # 🏆 The BPEagle Project: Ruby Code Golf Challenge
 
-## Contest: Perlbatross 2025 Fukuoka
+## Contest: ~~Perl~~Anybatross 2025 Fukuoka Hole 2
 
-This repository chronicles my journey and progressive solutions to the Perlbatross 2025 Fukuoka Code Golf Contest. My goal was to implement a simple **Byte Pair Encoding (BPE)**-like compression algorithm in the fewest bytes possible using Ruby.
+This repository chronicles my journey and progressive solutions to the ~~Perl~~Anybatross 2025 Fukuoka Code Golf Contest. My goal was to implement a simple **Byte Pair Encoding (BPE)**-like compression algorithm in the fewest bytes possible using Ruby.
 
 
 **Final Result:** 109 Bytes (Tied for 9th place on the final leaderboard).
@@ -110,4 +110,4 @@ My approach maximized byte savings within the **function-oriented `map` structur
 
 ### **Links**
 
-  * **Contest Site:** [https://perlbatross.kayac.com/contest/2025fukuoka](https://perlbatross.kayac.com/contest/2025fukuoka)
+  * **Contest Site:** [https://perlbatross.kayac.com/contest/2025fukuoka/challenge/2](https://perlbatross.kayac.com/contest/2025fukuoka/challenge/2)
